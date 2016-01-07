@@ -1,0 +1,82 @@
+﻿<Window x:Name="window"
+        x:Class="Gomoku2.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+        xmlns:prism ="http://prismlibrary.com/"
+        xmlns:Column="clr-namespace:Gomoku2"      
+        Title="Gomoku " Height="1000" Width="1000">
+    <Grid x:Name="Grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="C01" Width="7*"/>
+            <ColumnDefinition x:Name="C02" Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Grid_0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="r1" Height="65*"/>
+                <RowDefinition x:Name="r2" Height="600*"/>
+                <RowDefinition x:Name="r3" Height="304*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="g_banco" Background="White" Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="c00" Width="20"/>
+                    <ColumnDefinition x:Name="c01" Width="*"/>
+                    <ColumnDefinition x:Name="c02" Width="*"/>
+                    <ColumnDefinition x:Name="c03" Width="*"/>
+                    <ColumnDefinition x:Name="c04" Width="*"/>
+                    <ColumnDefinition x:Name="c05" Width="*"/>
+                    <ColumnDefinition x:Name="c06" Width="*"/>
+                    <ColumnDefinition x:Name="c07" Width="*"/>
+                    <ColumnDefinition x:Name="c08" Width="*"/>
+                    <ColumnDefinition x:Name="c09" Width="*"/>
+                    <ColumnDefinition x:Name="c010" Width="*"/>
+                    <ColumnDefinition x:Name="c011" Width="*"/>
+                    <ColumnDefinition x:Name="c012" Width="*"/>
+                    <ColumnDefinition x:Name="c013" Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Column:UC_Cot x:Name="Column1" _x="1" Grid.Row="1" Grid.Column="1" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column2" _x="2" Grid.Row="1" Grid.Column="2" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot x:Name="Column3" _x="3" Grid.Row="1" Grid.Column="3" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column4" _x="4" Grid.Row="1" Grid.Column="4" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot x:Name="Column5" _x="5" Grid.Row="1" Grid.Column="5" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column6" _x="6" Grid.Row="1" Grid.Column="6" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot x:Name="Column7" _x="7" Grid.Row="1" Grid.Column="7" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column8" _x="8" Grid.Row="1" Grid.Column="8" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot x:Name="Column9" _x="9" Grid.Row="1" Grid.Column="9" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column10" _x="10" Grid.Row="1" Grid.Column="10" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot x:Name="Column11" _x="11" Grid.Row="1" Grid.Column="11" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+                <Column:UC_Cot2 x:Name="Column12" _x="12" Grid.Row="1" Grid.Column="12" Height ="{Binding ElementName=c01, Path=Width, Mode=OneWay}" Width="{Binding ElementName=c01, Path=Width, Mode=OneWay}"/>
+            </Grid>
+            <Button x:Name="btn_AI" Content="Player vs AI" HorizontalAlignment="Left" Height="44" Margin="59,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" IsHitTestVisible="True" Click="btn_AI_Click"/>
+            <Button x:Name="btn_PvP" Content="Player vs Player" HorizontalAlignment="Left" Height="44" Margin="459,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="131" IsHitTestVisible="True" Click="btn_PvP_Click"/>
+            <Button x:Name="btn_OvP" Content="PlayerPlayOnline" HorizontalAlignment="Left" Margin="254,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="44" IsHitTestVisible="True" Click="btn_OvP_Click"/>
+            <TextBox x:Name="txt_turn" HorizontalAlignment="Left" Height="19" Margin="459,143,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Source={x:Static Column:AppSettings.connect}, Path=Player, Mode=OneWay}" VerticalAlignment="Top" Width="119" Visibility="Hidden"/>
+            <TextBox x:Name="txt_col" HorizontalAlignment="Left" Height="23" Margin="65,143,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text = "{Binding Source={x:Static Column:AppSettings.connect}, Path=X, Mode=OneWay}" Visibility="Hidden" TextChanged="txt_col_TextChanged"/>
+            <TextBox x:Name="txt_row" HorizontalAlignment="Left" Height="23" Margin="254,143,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Text = "{Binding Source={x:Static Column:AppSettings.connect}, Path=Y, Mode=OneWay}" TextChanged="txt_row_TextChanged" Visibility="Hidden"/>
+            <Button x:Name="btn_new" Content="New Game" HorizontalAlignment="Left" Height="46" Margin="59,143,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Click="btn_new_Click"/>
+            <Button x:Name="btn_AIOL" Content="AIPlayOnline" HorizontalAlignment="Left" Height="46" Margin="254,143,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Click="btn_AIOL_Click"/>
+        </Grid>
+
+        <Grid x:Name="Grid_1" Grid.Column="1" Background="Aqua">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="42*"/>
+                <RowDefinition Height="558*"/>
+                <RowDefinition Height="304*"/>
+            </Grid.RowDefinitions>
+            <Label Background="Transparent" Content="Chatbox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Grid.Row="1" Height="26"/>
+            <Label Content="Your name:" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="69" Grid.Row="0"/>
+            <TextBox x:Name="txt_Name" HorizontalAlignment="Center" Height="29"   VerticalAlignment="Top" Width="140" Grid.Row="0" />
+            <Button x:Name="btn_start" HorizontalAlignment="Right" Height="29" VerticalAlignment="Top" Width="75" Content="Start" Grid.Row="0" Click="btn_start_Click" IsHitTestVisible="False"/>
+            <TextBox x:Name="txt_message" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="177" Grid.Row="3" Height="18"/>
+            <Button x:Name="btn_Send" Content="Send" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Grid.Row="3" Height="20" Click="btn_Send_Click"/>
+            <TextBox x:Name="txt_History" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Background="AntiqueWhite" Height="538" Width="298" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Text = "{Binding Source={x:Static Column:AppSettings.connect}, Path=Message, Mode=OneWay}"/>
+        </Grid>
+    </Grid>
+</Window>
