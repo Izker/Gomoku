@@ -76,7 +76,7 @@
             <Button x:Name="btn_start" HorizontalAlignment="Right" Height="29" VerticalAlignment="Top" Width="75" Content="Start" Grid.Row="0" Click="btn_start_Click" IsHitTestVisible="False"/>
             <TextBox x:Name="txt_message" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="177" Grid.Row="3" Height="18"/>
             <Button x:Name="btn_Send" Content="Send" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80" Grid.Row="3" Height="20" Click="btn_Send_Click"/>
-            <TextBox x:Name="txt_History" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Background="AntiqueWhite" Height="538" Width="298" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Text = "{Binding Source={x:Static Column:AppSettings.connect}, Path=Message, Mode=OneWay}"/>
+            <TextBox x:Name="txt_History" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Background="AntiqueWhite" Height="538" Width="298" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Text = "{Binding Source={x:Static Column:AppSettings.connect}, Path=Message, Mode=OneWay}"/>
         </Grid>
     </Grid>
 </Window>

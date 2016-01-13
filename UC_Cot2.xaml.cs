@@ -154,8 +154,6 @@ namespace Gomoku2
                 default:
                     break;
             }
-
-            
         }
 
         private void btn_c1_Click(object sender, RoutedEventArgs e)

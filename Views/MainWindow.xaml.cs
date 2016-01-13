@@ -1796,11 +1796,14 @@ namespace Gomoku2.Views
                     }
                     res = ITestforWin1(si, --sj, active);
                 }
-                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3)
+                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3 || cells[si, sj] == 1)
                 {
-                    res = ITestforWin2(si, (sj + count + 1), active);
-                    count = 0;
-                    return res;
+                    if (res != true)
+                    {
+                        res = ITestforWin2(si, (sj + count + 1), active);
+                        count = 0;
+                        return res;
+                    }
                 }
             }
             return res;
@@ -1853,11 +1856,14 @@ namespace Gomoku2.Views
                     res = ITestforWin3(--si, sj, active);
                     
                 }
-                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3)
+                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3 || cells[si, sj] == 1)
                 {
-                    res = ITestforWin4((si + count + 1), sj, active);
-                    count = 0;
-                    return res;
+                    if (res != true)
+                    {
+                        res = ITestforWin4((si + count + 1), sj, active);
+                        count = 0;
+                        return res;
+                    }
                 }
             }
             return res;
@@ -1910,11 +1916,14 @@ namespace Gomoku2.Views
                     res = ITestforWin5(--si, --sj, active);
 
                 }
-                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3)
+                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3 || cells[si, sj] == 1)
                 {
-                    res = ITestforWin8((si + count + 1), (sj + count + 1), active);
-                    count = 0;
-                    return res;
+                    if (res != true)
+                    {
+                        res = ITestforWin8((si + count + 1), (sj + count + 1), active);
+                        count = 0;
+                        return res;
+                    }
                 }
             }
             return res;
@@ -1945,11 +1954,14 @@ namespace Gomoku2.Views
                         return res;
                     }
                 }
-                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3)
+                if (cells[si, sj] == 2 || cells[si, sj] == 0 || cells[si, sj] == 3 || cells[si, sj] == 1)
                 {
-                    res = ITestforWin7((si + count + 1), (sj - count - 1), active);
-                    count = 0;
-                    return res;
+                    if (res != true)
+                    {
+                        res = ITestforWin7((si + count + 1), (sj - count - 1), active);
+                        count = 0;
+                        return res;
+                    }
                 }
             }
             return res;
@@ -2030,12 +2042,14 @@ namespace Gomoku2.Views
         {
             o_x = (int)p.X - 1;
             o_y = (int)p.Y - 1;
-            socket.Emit("MyStepIs", JObject.FromObject(new { row = o_y, col = o_x }));
+            socket.Emit("MyStepIs", JObject.FromObject(new { row = o_x, col = o_y }));
         }
 
         public Socket socket;
         private string t;
         private string offMes = "";
+        public int t_x;
+        public int t_y;
         private void btn_start_Click(object sender, RoutedEventArgs e)
         {
             #region start
@@ -2133,11 +2147,14 @@ namespace Gomoku2.Views
                     }
                 });
 
+                
                 socket.On("NextStepIs", (data) =>
                 {
                     var jobject = data as JToken;
                     AppSettings.connect.Player = jobject.Value<int>("player");
                     this.AI_turn = AppSettings.connect.Player;
+                    t_x = jobject.Value<int>("col") + 1;
+                    t_y = jobject.Value<int>("row") + 1;
                     AppSettings.connect.X = jobject.Value<int>("col") + 1;
                     AppSettings.connect.Y = jobject.Value<int>("row") + 1;
                 });
@@ -4321,12 +4338,15 @@ namespace Gomoku2.Views
         private void txt_row_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.first++; // vì lúc khởi tạo textchange phat sinh sự kiện khi chuyển giá trị của textbox về 0 nên first = 1
-            if (cells[AppSettings.connect.X, AppSettings.connect.Y] != 0)
-                return;
+            if (cells[t_x, t_y] != 0)
+            {
+                if (this.type == 4)
+                    return;
+            }
             if (AppSettings.connect.Player == 0)
-                cells[AppSettings.connect.X, AppSettings.connect.Y] = 1;
+                cells[t_x, t_y] = 1;
             else
-                cells[AppSettings.connect.X, AppSettings.connect.Y] = 3;
+                cells[t_x, t_y] = 3;
             
             createCheck();
             if (this.type == 4 && first != 2 && this.AI_turn == 0)
@@ -4351,12 +4371,15 @@ namespace Gomoku2.Views
         private void txt_col_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.first++; // vì lúc khởi tạo textchange phat sinh sự kiện khi chuyển giá trị của textbox về 0 nên first = 1
-            if (cells[AppSettings.connect.X, AppSettings.connect.Y] != 0)
-                return;
+            if (cells[t_x, t_y] != 0)
+            {
+                if (this.type == 4)
+                    return;
+            }
             if (AppSettings.connect.Player == 0)
-                cells[AppSettings.connect.X, AppSettings.connect.Y] = 1;
+                cells[t_x, t_y] = 1;
             else
-                cells[AppSettings.connect.X, AppSettings.connect.Y] = 3;
+                cells[t_x, t_y] = 3;
 
             createCheck();
             if (this.type == 4 && first != 2 && this.AI_turn == 0)
@@ -4364,6 +4387,11 @@ namespace Gomoku2.Views
                 if (this.AI_turn != AppSettings.connect.Player)
                 {
                     new_ai = ai_FindWay();
+                    //if(new_ai.X == 0 && new_ai.Y == 0)
+                    //{
+                    //    new_ai.X += 3;
+                    //    new_ai.Y += 3;
+                    //}
                     PlayOnline(new_ai);
                 }
             }
